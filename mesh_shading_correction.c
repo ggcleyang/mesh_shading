@@ -46,34 +46,35 @@ void  generate_mlsc_gain(uint16* img,raw_info rawInfo,mesh_grid_info *meshGridIn
                     if( 0 == bayerPattLUT[0][y & 0x1][x & 0x1]){
                         cntR++;
                         sumR = sumR + img[y*raw_width+x];
-                        mesh_mean.lsc_gain[j][i][0] = (float)sumR/DIV_0_TO_1(cntR);
-                        cntR =0;
-                        sumR = 0;
-                    }
+                     }
                     if( 1 == bayerPattLUT[0][y & 0x1][x & 0x1]){
                         cntGR++;
                         sumGR = sumGR + img[y*raw_width+x];
-                        mesh_mean.lsc_gain[j][i][1] = (float)sumGR/DIV_0_TO_1(cntGR);
-                        cntGR =0;
-                        sumGR = 0;
-                    }
+                     }
                     if( 2 == bayerPattLUT[0][y & 0x1][x & 0x1]){
                         cntGB++;
                         sumGB = sumGB + img[y*raw_width+x];
-                        mesh_mean.lsc_gain[j][i][2] = (float)sumGB/DIV_0_TO_1(cntGB);
-                        cntGB =0;
-                        sumGB = 0;
                     }
                     if( 3 == bayerPattLUT[0][y & 0x1][x & 0x1]){
                         cntB++;
                         sumB = sumB + img[y*raw_width+x];
-                        mesh_mean.lsc_gain[j][i][3] = (float)sumB/DIV_0_TO_1(cntB);
-                        cntB =0;
-                        sumB = 0;
                     }
 
                 }//end x
             }//end y
+            mesh_mean.lsc_gain[j][i][0] = (float)sumR/DIV_0_TO_1(cntR);
+            cntR =0;
+            sumR = 0;
+            mesh_mean.lsc_gain[j][i][1] = (float)sumGR/DIV_0_TO_1(cntGR);
+            cntGR =0;
+            sumGR = 0;
+            mesh_mean.lsc_gain[j][i][2] = (float)sumGB/DIV_0_TO_1(cntGB);
+            cntGB =0;
+            sumGB = 0;
+            mesh_mean.lsc_gain[j][i][3] = (float)sumB/DIV_0_TO_1(cntB);
+            cntB =0;
+            sumB = 0;
+
         }//end i
     }//end j
     float  center_R = mesh_mean.lsc_gain[MLSC_ZONE_ROW/2][MLSC_ZONE_COL/2][0];
